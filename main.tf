@@ -374,7 +374,7 @@ resource "aws_instance" "vpc_nat" {
     vpc_security_group_ids = [
         "${aws_security_group.vpc_nat.id}"
     ]
-    monitoring = ${var.vpc_nat_detailed_monitoring}
+    monitoring = "${var.vpc_nat_detailed_monitoring}"
 
     # Key to allow SSH access
     key_name = "${aws_key_pair.nat_key.key_name}"
