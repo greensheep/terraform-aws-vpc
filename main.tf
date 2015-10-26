@@ -394,6 +394,10 @@ output "vpc_id" {
     value = "${aws_vpc.main.id}"
 }
 
+output "vpc_region" {
+    value = "${var.vpc_region}"
+}
+
 output "vpc_private_subnets" {
     value = "${aws_subnet.private_1.cidr_block},${aws_subnet.private_2.cidr_block},${aws_subnet.private_3.cidr_block}"
 }
