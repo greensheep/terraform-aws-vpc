@@ -56,6 +56,7 @@ resource "aws_vpc" "main" {
     
     tags {
         Name = "${var.vpc_name}"
+        ManagedBy = "terraform"
     }
 
     lifecycle {
@@ -78,6 +79,7 @@ resource "aws_subnet" "private_1" {
     tags {
         Name = "${var.vpc_name}-Private Subnet 1"
         VPC = "${var.vpc_name}"
+        ManagedBy = "terraform"
     }
 
     lifecycle {
@@ -96,6 +98,7 @@ resource "aws_subnet" "private_2" {
     tags {
         Name = "${var.vpc_name}-Private Subnet 2"
         VPC = "${var.vpc_name}"
+        ManagedBy = "terraform"
     }
 
     lifecycle {
@@ -114,6 +117,7 @@ resource "aws_subnet" "private_3" {
     tags {
         Name = "${var.vpc_name}-Private Subnet 3"
         VPC = "${var.vpc_name}"
+        ManagedBy = "terraform"
     }
 
     lifecycle {
@@ -136,6 +140,7 @@ resource "aws_subnet" "public_1" {
     tags {
         Name = "${var.vpc_name}-Public Subnet 1"
         VPC = "${var.vpc_name}"
+        ManagedBy = "terraform"
     }
 
     lifecycle {
@@ -154,6 +159,7 @@ resource "aws_subnet" "public_2" {
     tags {
         Name = "${var.vpc_name}-Public Subnet 2"
         VPC = "${var.vpc_name}"
+        ManagedBy = "terraform"
     }
 
     lifecycle {
@@ -172,6 +178,7 @@ resource "aws_subnet" "public_3" {
     tags {
         Name = "${var.vpc_name}-Public Subnet 3"
         VPC = "${var.vpc_name}"
+        ManagedBy = "terraform"
     }
 
     lifecycle {
@@ -191,6 +198,7 @@ resource "aws_internet_gateway" "gateway" {
     tags {
         Name = "${var.vpc_name}-Internet-Gateway"
         VPC = "${var.vpc_name}"
+        ManagedBy = "terraform"
     }
 
     lifecycle {
@@ -208,6 +216,10 @@ resource "aws_main_route_table_association" "main_routes" {
 
     vpc_id = "${aws_vpc.main.id}"
     route_table_id = "${aws_route_table.private_routes.id}"
+    
+    tags {
+        ManagedBy = "terraform"
+    }
 
 }
 
@@ -227,6 +239,7 @@ resource "aws_route_table" "private_routes" {
     tags {
         Name = "${var.vpc_name}-Private-Routing"
         VPC = "${var.vpc_name}"
+        ManagedBy = "terraform"
     }
 
 }
@@ -237,6 +250,10 @@ resource "aws_route_table_association" "private_a1" {
 
     subnet_id = "${aws_subnet.private_1.id}"
     route_table_id = "${aws_route_table.private_routes.id}"
+    
+    tags {
+        ManagedBy = "terraform"
+    }
 
 }
 
@@ -246,6 +263,10 @@ resource "aws_route_table_association" "private_a2" {
 
     subnet_id = "${aws_subnet.private_2.id}"
     route_table_id = "${aws_route_table.private_routes.id}"
+    
+    tags {
+        ManagedBy = "terraform"
+    }
 
 }
 
@@ -255,6 +276,10 @@ resource "aws_route_table_association" "private_a3" {
 
     subnet_id = "${aws_subnet.private_3.id}"
     route_table_id = "${aws_route_table.private_routes.id}"
+    
+    tags {
+        ManagedBy = "terraform"
+    }
 
 }
 
@@ -274,6 +299,7 @@ resource "aws_route_table" "public_routes" {
     tags {
         Name = "${var.vpc_name}-Public-Routing"
         VPC = "${var.vpc_name}"
+        ManagedBy = "terraform"
     }
 
 }
@@ -284,6 +310,10 @@ resource "aws_route_table_association" "public_a1" {
 
     subnet_id = "${aws_subnet.public_1.id}"
     route_table_id = "${aws_route_table.public_routes.id}"
+    
+    tags {
+        ManagedBy = "terraform"
+    }
 
 }
 
@@ -293,6 +323,10 @@ resource "aws_route_table_association" "public_a2" {
 
     subnet_id = "${aws_subnet.public_2.id}"
     route_table_id = "${aws_route_table.public_routes.id}"
+    
+    tags {
+        ManagedBy = "terraform"
+    }
 
 }
 
@@ -302,6 +336,10 @@ resource "aws_route_table_association" "public_a3" {
 
     subnet_id = "${aws_subnet.public_3.id}"
     route_table_id = "${aws_route_table.public_routes.id}"
+    
+    tags {
+        ManagedBy = "terraform"
+    }
 
 }
 
@@ -338,6 +376,7 @@ resource "aws_security_group" "vpc_nat" {
     tags {
         Name = "${var.vpc_name}-NAT-Instance"
         VPC = "${var.vpc_name}"
+        ManagedBy = "terraform"
     }
 
 }
@@ -351,6 +390,10 @@ resource "aws_key_pair" "nat_key" {
 
     key_name   = "${var.vpc_name}-nat"
     public_key = "${file("${var.vpc_nat_key_file}")}"
+    
+    tags {
+        ManagedBy = "terraform"
+    }
 
     lifecycle {
         create_before_destroy = true
@@ -382,6 +425,7 @@ resource "aws_instance" "vpc_nat" {
     tags {
         Name = "${var.vpc_name}-NAT-Instance"
         VPC = "${var.vpc_name}"
+        ManagedBy = "terraform"
     }
 
 }
