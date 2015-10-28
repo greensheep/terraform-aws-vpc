@@ -216,10 +216,6 @@ resource "aws_main_route_table_association" "main_routes" {
 
     vpc_id = "${aws_vpc.main.id}"
     route_table_id = "${aws_route_table.private_routes.id}"
-    
-    tags {
-        ManagedBy = "terraform"
-    }
 
 }
 
@@ -250,10 +246,6 @@ resource "aws_route_table_association" "private_a1" {
 
     subnet_id = "${aws_subnet.private_1.id}"
     route_table_id = "${aws_route_table.private_routes.id}"
-    
-    tags {
-        ManagedBy = "terraform"
-    }
 
 }
 
@@ -263,10 +255,6 @@ resource "aws_route_table_association" "private_a2" {
 
     subnet_id = "${aws_subnet.private_2.id}"
     route_table_id = "${aws_route_table.private_routes.id}"
-    
-    tags {
-        ManagedBy = "terraform"
-    }
 
 }
 
@@ -276,10 +264,6 @@ resource "aws_route_table_association" "private_a3" {
 
     subnet_id = "${aws_subnet.private_3.id}"
     route_table_id = "${aws_route_table.private_routes.id}"
-    
-    tags {
-        ManagedBy = "terraform"
-    }
 
 }
 
@@ -310,10 +294,6 @@ resource "aws_route_table_association" "public_a1" {
 
     subnet_id = "${aws_subnet.public_1.id}"
     route_table_id = "${aws_route_table.public_routes.id}"
-    
-    tags {
-        ManagedBy = "terraform"
-    }
 
 }
 
@@ -323,10 +303,6 @@ resource "aws_route_table_association" "public_a2" {
 
     subnet_id = "${aws_subnet.public_2.id}"
     route_table_id = "${aws_route_table.public_routes.id}"
-    
-    tags {
-        ManagedBy = "terraform"
-    }
 
 }
 
@@ -336,10 +312,6 @@ resource "aws_route_table_association" "public_a3" {
 
     subnet_id = "${aws_subnet.public_3.id}"
     route_table_id = "${aws_route_table.public_routes.id}"
-    
-    tags {
-        ManagedBy = "terraform"
-    }
 
 }
 
@@ -390,10 +362,6 @@ resource "aws_key_pair" "nat_key" {
 
     key_name   = "${var.vpc_name}-nat"
     public_key = "${file("${var.vpc_nat_key_file}")}"
-    
-    tags {
-        ManagedBy = "terraform"
-    }
 
     lifecycle {
         create_before_destroy = true
