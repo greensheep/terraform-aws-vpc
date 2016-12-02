@@ -40,6 +40,11 @@ variable "vpc_nat_key_file" {
     description = "Path to a key file for the VPC NAT instance"
 }
 
+variable "vpc_ip_prefix" {
+    description = "IP Prefix for the VPC"
+    default = "10.0"
+}
+
 #########
 ## VPC ##
 #########
@@ -50,7 +55,7 @@ variable "vpc_nat_key_file" {
 
 resource "aws_vpc" "main" {
     
-    cidr_block = "10.0.0.0/16"
+    cidr_block = "${var.vpc_ip_prefix}.0.0/16"
     enable_dns_support = true
     enable_dns_hostnames = true
     
@@ -73,7 +78,7 @@ resource "aws_subnet" "private_1" {
 
     vpc_id = "${aws_vpc.main.id}"
     availability_zone = "${var.vpc_region}a"
-    cidr_block = "10.0.1.0/24"
+    cidr_block = "${var.vpc_ip_prefix}.1.0/24"
     map_public_ip_on_launch = false
 
     tags {
@@ -92,7 +97,7 @@ resource "aws_subnet" "private_2" {
 
     vpc_id = "${aws_vpc.main.id}"
     availability_zone = "${var.vpc_region}b"
-    cidr_block = "10.0.2.0/24"
+    cidr_block = "${var.vpc_ip_prefix}.2.0/24"
     map_public_ip_on_launch = false
 
     tags {
@@ -111,7 +116,7 @@ resource "aws_subnet" "private_3" {
 
     vpc_id = "${aws_vpc.main.id}"
     availability_zone = "${var.vpc_region}c"
-    cidr_block = "10.0.3.0/24"
+    cidr_block = "${var.vpc_ip_prefix}.3.0/24"
     map_public_ip_on_launch = false
     
     tags {
@@ -134,7 +139,7 @@ resource "aws_subnet" "public_1" {
     
     vpc_id = "${aws_vpc.main.id}"
     availability_zone = "${var.vpc_region}a"
-    cidr_block = "10.0.11.0/24"
+    cidr_block = "${var.vpc_ip_prefix}.11.0/24"
     map_public_ip_on_launch = true
 
     tags {
@@ -153,7 +158,7 @@ resource "aws_subnet" "public_2" {
     
     vpc_id = "${aws_vpc.main.id}"
     availability_zone = "${var.vpc_region}b"
-    cidr_block = "10.0.22.0/24"
+    cidr_block = "${var.vpc_ip_prefix}.22.0/24"
     map_public_ip_on_launch = true
     
     tags {
@@ -172,7 +177,7 @@ resource "aws_subnet" "public_3" {
     
     vpc_id = "${aws_vpc.main.id}"
     availability_zone = "${var.vpc_region}c"
-    cidr_block = "10.0.33.0/24"
+    cidr_block = "${var.vpc_ip_prefix}.33.0/24"
     map_public_ip_on_launch = true
 
     tags {
